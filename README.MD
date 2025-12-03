@@ -74,33 +74,13 @@ Ikuti langkah-langkah ini untuk menjalankan proyek di komputer lokal.
 1. Pastikan MySQL 9.1.0 dan MinIO 2022-12-12T19-27-27Z sudah berjalan. Buat database kosong bernama `ecommerce`.
 
 Untuk Menjalankan MYSQL
-
 - Buka CMD masuk ke folder mysql/bin jalankan mysqld
 
 Untuk Menjalankan Minio
-
 - Buka CMD masuk ke folder minio yang sudah ada file minio.exe lalu jalankan minio.exe server C:\minio\data
-
-Buka file `src/main/resources/application.properties` pastika isinya seperti berikut ini:
-
-```properties
-# Database Configuration
-spring.datasource.url=jdbc:mysql://localhost:3306/ecommerce_db
-spring.datasource.username=root
-spring.datasource.password=password_mysql_anda
-
-# Hibernate
-spring.jpa.hibernate.ddl-auto=update
-
-# MinIO Configuration (Cloud Storage)
-minio.url=http://localhost:9000
-minio.accessKey=minioadmin
-minio.secretKey=minioadmin
-minio.bucket=test-bucket
 
 Untuk Menjalankan Spring-Boot
 - Masuk Ke folder Project di terminal VSCode lalu jalankan mvn spring-boot:run
 
 Untuk Menjalankan ReactJs
 - Masuk ke root ECommerceUAS\ecommerce-frontend lalu jalankan npm Start
-```
