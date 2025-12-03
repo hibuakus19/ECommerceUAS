@@ -1,0 +1,47 @@
+{"properties": [
+  {
+    "name": "allowPublicKeyRetrieval",
+    "type": "java.lang.String",
+    "description": "A description for 'allowPublicKeyRetrieval'"
+  },
+  {
+    "name": "allowPublicKeyRetrieval",
+    "type": "java.lang.String",
+    "description": "A description for 'allowPublicKeyRetrieval'"
+  },
+  {
+    "name": "minio.bucket",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.bucket'"
+  },
+  {
+    "name": "minio.secretKey",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.secretKey'"
+  },
+  {
+    "name": "minio.accessKey",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.accessKey'"
+  },
+  {
+    "name": "minio.url",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.url'"
+  },
+  {
+    "name": "minio.accessKey",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.accessKey'"
+  },
+  {
+    "name": "minio.secretKey",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.secretKey'"
+  },
+  {
+    "name": "minio.accessKey",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.accessKey'"
+  }
+]}

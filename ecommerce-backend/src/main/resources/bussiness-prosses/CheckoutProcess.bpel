@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CheckoutProcess"
+         targetNamespace="http://ecommerceuas.com/bpel/checkout"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:tns="http://ecommerceuas.com/bpel/checkout"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ps="http://ecommerceuas.com/wsdl/productService"
+         xmlns:cs="http://ecommerceuas.com/wsdl/cartService">
+
+    <variables>
+        <variable name="CheckoutRequest" messageType="tns:CheckoutRequestMessage"/>
+        <variable name="CheckoutResponse" messageType="tns:CheckoutResponseMessage"/>
+        <variable name="StockAvailable" type="xsd:boolean"/>
+        <variable name="TotalPrice" type="xsd:double"/>
+    </variables>
+
+    <partnerLinks>
+        <partnerLink name="client" partnerLinkType="tns:CheckoutPLT" myRole="CheckoutService"/>
+        <partnerLink name="ProductService" partnerLinkType="ps:ProductServicePLT" partnerRole="ProductServiceProvider"/>
+        <partnerLink name="CartService" partnerLinkType="cs:CartServicePLT" partnerRole="CartServiceProvider"/>
+    </partnerLinks>
+
+    <sequence name="MainSequence">
+        
+        <receive name="ReceiveCheckout" partnerLink="client" 
+                 portType="tns:CheckoutPT" operation="process" 
+                 variable="CheckoutRequest" createInstance="yes"/>
+
+        <invoke name="CheckStock" partnerLink="ProductService" 
+                operation="checkStockAvailability" 
+                inputVariable="CheckoutRequest" 
+                outputVariable="StockAvailable"/>
+
+        <if name="IsStockSufficient">
+            
+            <condition>$StockAvailable = true()</condition>
+            <sequence>
+                
+                <invoke name="DeductStock" partnerLink="ProductService" 
+                        operation="reduceStock" 
+                        inputVariable="CheckoutRequest"/>
+
+                <invoke name="ClearCart" partnerLink="CartService" 
+                        operation="clearUserCart" 
+                        inputVariable="CheckoutRequest"/>
+
+                <assign name="AssignSuccess">
+                    <copy>
+                        <from>'SUCCESS: Transaksi Berhasil'</from>
+                        <to variable="CheckoutResponse" part="status"/>
+                    </copy>
+                </assign>
+            </sequence>
+
+            <else>
+                <assign name="AssignFailure">
+                    <copy>
+                        <from>'FAILED: Stok Barang Tidak Mencukupi'</from>
+                        <to variable="CheckoutResponse" part="status"/>
+                    </copy>
+                </assign>
+            </else>
+        </if>
+
+        <reply name="ReplyToUser" partnerLink="client" 
+               portType="tns:CheckoutPT" operation="process" 
+               variable="CheckoutResponse"/>
+               
+    </sequence>
+</process>
