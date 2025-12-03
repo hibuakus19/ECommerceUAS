@@ -76,7 +76,7 @@ Untuk Instalasi
 - Masuk Ke folder Project, Masuk ke root ECommerceUAS\ecommerce-frontend lalu jalankan npm install di terminal VSCode
 
 
-Pastikan MySQL 9.1.0 dan MinIO 2022-12-12T19-27-27Z sudah berjalan. Buat database kosong bernama `ecommerce`.
+Pastikan MySQL 9.1.0 dan MinIO 2022-12-12T19-27-27Z sudah berjalan. Buat database kosong bernama `ecommerce` dan buat bucket minio kosong bernama `bucket-test`.
 
 Untuk Menjalankan MYSQL
 
